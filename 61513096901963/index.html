@@ -262,12 +262,12 @@ O él despertará...
   const faseSecreta =
     document.getElementById("faseSecreta");
 
-  const colores = ["white", "black", "blue"];
+  const colores = ["white", "black", "blue", "purple", "green"];
 
   const estados = [0, 0, 0, 0, 0];
 
-  // Azul, azul, negro, blanco, negro
-  const solucion = [2, 2, 1, 0, 1];
+  // Azul Negro Azul Blanco Violeta
+  const solucion = [2, 1, 2, 0, 3];
 
   boton.addEventListener("click", () => {
     panel.style.display =
@@ -328,8 +328,8 @@ O él despertará...
 
       if (correcta) {
         resultado.textContent =
-          "¡Contraseña correcta! Has superado la prueba.";
-        resultado.style.color = "#4ade80";
+          "Enhorabuena, el último dígito es... bueno, dime tú: ¿Qué día es hoy?';
+        resultado.style.color = "#4ade80"; 
       } else {
         resultado.textContent =
           "Contraseña incorrecta. Inténtalo de nuevo.";

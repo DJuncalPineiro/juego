@@ -1,25 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
-  <title>¡Lo habéis conseguido!</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    img {
-      max-width: 95vw;
-      max-height: 95vh;
-      object-fit: contain;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<title>El misterio continúa</title>
+
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+  }
+
+  /* Foto original */
+  .foto {
+    max-width: 95%;
+    max-height: 90vh;
+    object-fit: contain;
+    margin: 40px auto;
+  }
+
+  /* Botón secreto invisible */
+  #botonSecreto {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: black;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  /* Contenedor de las cajas */
+  #panel {
+    display: none;
+    position: fixed;
+    top: 55px;
+    right: 10px;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  /* Cada caja */
+  .caja {
+    width: 38px;
+    height: 38px;
+    background: white;
+    border: 1px solid gray;
+    cursor: pointer;
+  }
+
+  /* Foto desbloqueada */
+  #fotoSecreta {
+    display: none;
+    max-width: 95%;
+    max-height: 90vh;
+    object-fit: contain;
+    margin: 30px auto;
+  }
+</style>
 </head>
+
 <body>
-  <img src="foto.jpg" alt="Secreto descubierto">
+
+<!-- Botón invisible -->
+<button id="botonSecreto"
+        aria-label="Abrir panel secreto">
+</button>
+
+<!-- Cinco cajas -->
+<div id="panel">
+  <button class="caja"></button>
+  <button class="caja"></button>
+  <button class="caja"></button>
+  <button class="caja"></button>
+  <button class="caja"></button>
+</div>
+
+<!-- Foto original -->
+<img src="foto.jpg" class="foto"
+     alt="Imagen del acertijo">
+
+<!-- Segunda foto oculta -->
+<img src="secreto.jpg" id="fotoSecreta"
+     alt="Imagen desbloqueada">
+
+<script>
+  const boton = document.getElementById(
+    "botonSecreto"
+  );
+  const panel = document.getElementById("panel");
+  const cajas = document.querySelectorAll(".caja");
+  const fotoSecreta = document.getElementById(
+    "fotoSecreta"
+  );
+
+  const colores = ["white", "black", "blue"];
+  const estados = [0, 0, 0, 0, 0];
+
+  // Combinación correcta:
+  // azul, azul, negro, blanco, negro
+  const solucion = [2, 2, 1, 0, 1];
+
+  // Mostrar u ocultar cajas
+  boton.addEventListener("click", () => {
+    panel.style.display =
+      panel.style.display === "flex"
+        ? "none"
+        : "flex";
+  });
+
+  // Cambiar colores al pulsar
+  cajas.forEach((caja, i) => {
+    caja.addEventListener("click", () => {
+      estados[i] = (estados[i] + 1) % 3;
+      caja.style.backgroundColor =
+        colores[estados[i]];
+
+      comprobar();
+    });
+  });
+
+  // Comprobar combinación
+  function comprobar() {
+    const correcto = estados.every(
+      (valor, i) => valor === solucion[i]
+    );
+
+    if (correcto) {
+      fotoSecreta.style.display = "block";
+    } else {
+      fotoSecreta.style.display = "none";
+    }
+  }
+</script>
+
 </body>
 </html>

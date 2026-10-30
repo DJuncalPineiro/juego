@@ -262,7 +262,7 @@ o él despertará...
   const faseSecreta =
     document.getElementById("faseSecreta");
 
-  const colores = ["white", "black", "blue", "purple", "green"];
+  const colores = ["white", "black", "blue", "violet", "green"];
 
   const estados = [0, 0, 0, 0, 0];
 
@@ -279,7 +279,7 @@ o él despertará...
   cajas.forEach((caja, i) => {
     caja.addEventListener("click", () => {
 
-      estados[i] = (estados[i] + 1) % 3;
+      estados[i] = (estados[i] + 1) % 5;
 
       caja.style.backgroundColor =
         colores[estados[i]];

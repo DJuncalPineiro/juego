@@ -323,8 +323,10 @@ o él despertará...
         .replace(/\s+/g, " ");
 
       const correcta =
-        respuesta === "absoluta pipu1" ||
-        respuesta === "pipu1 absoluta";
+        respuesta === "absoluta pipu0" ||
+        respuesta === "pipu0 absoluta" ||
+        respuesta === "pipu absoluta" ||
+        respuesta === "absoluta pipu";
 
       if (correcta) {
         resultado.textContent =
